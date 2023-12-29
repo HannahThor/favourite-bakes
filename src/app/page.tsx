@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -7,9 +8,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
+import { ButtonLink } from "@/components/ButtonLink";
 interface Recipe {
   title: string;
   image: string;
@@ -17,9 +18,11 @@ interface Recipe {
   description: string;
   veggie: boolean;
   id: string;
+  buttonUrl: string;
 }
 
 async function getRecipes(): Promise<Recipe[]> {
+  console.log("fetching recipes");
   const result = await fetch("http://localhost:4000/recipes");
 
   // delay response
@@ -30,7 +33,7 @@ async function getRecipes(): Promise<Recipe[]> {
 
 export default async function Home() {
   const recipes = await getRecipes();
-
+  console.log(recipes);
   return (
     <main>
       <div className="grid grid-cols-3 gap-8">
@@ -50,7 +53,11 @@ export default async function Home() {
               <p>{recipe.description}</p>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button>View Recipe</Button>
+              <Button asChild>
+                <Link href={recipe.buttonUrl} target="_blank">
+                  View Recipe
+                </Link>
+              </Button>
               {recipe.veggie && <Badge variant="secondary">Veggie!</Badge>}
             </CardFooter>
           </Card>
