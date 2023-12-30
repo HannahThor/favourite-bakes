@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { recipes } from "@/utils/constants";
 
 interface Recipe {
   title: string;
@@ -22,18 +23,15 @@ interface Recipe {
 }
 
 async function getRecipes(): Promise<Recipe[]> {
-  console.log("fetching recipes");
-  const result = await fetch("http://localhost:4000/recipes");
-
   // delay response
   await new Promise((resolve) => setTimeout(resolve, 3000));
 
-  return result.json();
+  return recipes;
 }
 
 export default async function Home() {
   const recipes = await getRecipes();
-  console.log(recipes);
+
   return (
     <main>
       <div className="grid grid-cols-3 gap-8">
