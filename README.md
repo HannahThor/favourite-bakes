@@ -10,7 +10,7 @@ I used shadcn/ui (https://ui.shadcn.com/) component library, I loved that the co
 
 Enjoy my most baked treats of 2023.
 
-### Features
+## Features
 - Dark and Light Mode
 - Prep and cook time = " " mins to cook
 - Veggie options
